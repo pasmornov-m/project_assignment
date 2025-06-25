@@ -1,0 +1,100 @@
+[2025-06-25T14:00:01.717+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-06-25T14:00:01.747+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: sync_ds.sync_ds scheduled__2025-06-25T13:00:00+00:00 [queued]>
+[2025-06-25T14:00:01.758+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: sync_ds.sync_ds scheduled__2025-06-25T13:00:00+00:00 [queued]>
+[2025-06-25T14:00:01.759+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2025-06-25T14:00:01.777+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): sync_ds> on 2025-06-25 13:00:00+00:00
+[2025-06-25T14:00:01.788+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=627) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-06-25T14:00:01.790+0000] {standard_task_runner.py:72} INFO - Started process 629 to run task
+[2025-06-25T14:00:01.791+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'sync_ds', 'sync_ds', 'scheduled__2025-06-25T13:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/dag_ds_etl.py', '--cfg-path', '/tmp/tmp3fgdxavh']
+[2025-06-25T14:00:01.795+0000] {standard_task_runner.py:105} INFO - Job 9: Subtask sync_ds
+[2025-06-25T14:00:01.884+0000] {task_command.py:467} INFO - Running <TaskInstance: sync_ds.sync_ds scheduled__2025-06-25T13:00:00+00:00 [running]> on host c6045225ec44
+[2025-06-25T14:00:02.055+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='maxp' AIRFLOW_CTX_DAG_ID='sync_ds' AIRFLOW_CTX_TASK_ID='sync_ds' AIRFLOW_CTX_EXECUTION_DATE='2025-06-25T13:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-06-25T13:00:00+00:00'
+[2025-06-25T14:00:02.056+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2025-06-25T14:00:02.074+0000] {log.py:232} WARNING - 2025-06-25 14:00:02,073 [INFO] etl.stages: === Начало процесса синхронизации DS ===
+[2025-06-25T14:00:02.073+0000] {stages.py:119} INFO - === Начало процесса синхронизации DS ===
+[2025-06-25T14:00:02.074+0000] {log.py:232} WARNING - 2025-06-25 14:00:02,074 [INFO] etl.stages: Начало: 2025-06-25 14:00:02
+[2025-06-25T14:00:02.074+0000] {stages.py:121} INFO - Начало: 2025-06-25 14:00:02
+[2025-06-25T14:00:07.076+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,076 [INFO] db_utils.check_postges: Проверка/создание БД 'project', схемы 'ds', и таблиц из 'db_utils/ds_tables.sql'
+[2025-06-25T14:00:07.076+0000] {check_postges.py:63} INFO - Проверка/создание БД 'project', схемы 'ds', и таблиц из 'db_utils/ds_tables.sql'
+[2025-06-25T14:00:07.088+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,088 [INFO] db_utils.check_postges: Проверка существования базы данных 'project'
+[2025-06-25T14:00:07.088+0000] {check_postges.py:13} INFO - Проверка существования базы данных 'project'
+[2025-06-25T14:00:07.091+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,091 [INFO] db_utils.check_postges: База данных 'project' уже существует.
+[2025-06-25T14:00:07.091+0000] {check_postges.py:22} INFO - База данных 'project' уже существует.
+[2025-06-25T14:00:07.102+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,102 [INFO] db_utils.check_postges: Создаю схему 'ds' в базе 'project' (если она отсутствует)
+[2025-06-25T14:00:07.102+0000] {check_postges.py:33} INFO - Создаю схему 'ds' в базе 'project' (если она отсутствует)
+[2025-06-25T14:00:07.103+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,103 [INFO] db_utils.check_postges: Схема 'ds' готова.
+[2025-06-25T14:00:07.103+0000] {check_postges.py:35} INFO - Схема 'ds' готова.
+[2025-06-25T14:00:07.115+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,115 [INFO] db_utils.check_postges: Читаю SQL из файла 'db_utils/ds_tables.sql'
+[2025-06-25T14:00:07.115+0000] {check_postges.py:46} INFO - Читаю SQL из файла 'db_utils/ds_tables.sql'
+[2025-06-25T14:00:07.116+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,116 [INFO] db_utils.check_postges: Выполняю SQL для создания таблиц
+[2025-06-25T14:00:07.116+0000] {check_postges.py:50} INFO - Выполняю SQL для создания таблиц
+[2025-06-25T14:00:07.117+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,117 [INFO] db_utils.check_postges: Таблицы успешно созданы.
+[2025-06-25T14:00:07.117+0000] {check_postges.py:53} INFO - Таблицы успешно созданы.
+[2025-06-25T14:00:07.119+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,118 [INFO] etl.stages: Начало обновления таблиц в схеме 'ds' БД 'project'
+[2025-06-25T14:00:07.118+0000] {stages.py:64} INFO - Начало обновления таблиц в схеме 'ds' БД 'project'
+[2025-06-25T14:00:07.260+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,260 [INFO] etl.stages: Данные из csv успешно загружены: ['ft_balance_f', 'ft_posting_f', 'md_account_d', 'md_currency_d', 'md_exchange_rate_d', 'md_ledger_account_s']
+[2025-06-25T14:00:07.260+0000] {stages.py:69} INFO - Данные из csv успешно загружены: ['ft_balance_f', 'ft_posting_f', 'md_account_d', 'md_currency_d', 'md_exchange_rate_d', 'md_ledger_account_s']
+[2025-06-25T14:00:07.261+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,261 [INFO] etl.stages: Truncate таблицы ds.ft_posting_f перед полной загрузкой
+[2025-06-25T14:00:07.261+0000] {stages.py:73} INFO - Truncate таблицы ds.ft_posting_f перед полной загрузкой
+[2025-06-25T14:00:07.277+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,276 [INFO] etl.stages: Таблица успешно очищена.
+[2025-06-25T14:00:07.276+0000] {stages.py:79} INFO - Таблица успешно очищена.
+[2025-06-25T14:00:07.277+0000] {log.py:232} WARNING - 2025-06-25 14:00:07,277 [INFO] etl.stages: Вставка данных в ft_posting_f
+[2025-06-25T14:00:07.277+0000] {stages.py:88} INFO - Вставка данных в ft_posting_f
+[2025-06-25T14:00:15.115+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,115 [INFO] etl.stages: Загрузка данных в ft_posting_f завершена.
+[2025-06-25T14:00:15.115+0000] {stages.py:90} INFO - Загрузка данных в ft_posting_f завершена.
+[2025-06-25T14:00:15.116+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,116 [INFO] etl.stages: Обновление данных в ds.ft_balance_f с помощью upsert
+[2025-06-25T14:00:15.116+0000] {stages.py:99} INFO - Обновление данных в ds.ft_balance_f с помощью upsert
+[2025-06-25T14:00:15.129+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,129 [INFO] utils.writers: Загрузка/обновление данных в ds.ft_balance_f
+[2025-06-25T14:00:15.129+0000] {writers.py:50} INFO - Загрузка/обновление данных в ds.ft_balance_f
+[2025-06-25T14:00:15.137+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,137 [INFO] utils.writers: Успешно обновлено 114 строк в ds.ft_balance_f
+[2025-06-25T14:00:15.137+0000] {writers.py:53} INFO - Успешно обновлено 114 строк в ds.ft_balance_f
+[2025-06-25T14:00:15.138+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,138 [INFO] etl.stages: Данные успешно обновлены в ds.ft_balance_f
+[2025-06-25T14:00:15.138+0000] {stages.py:108} INFO - Данные успешно обновлены в ds.ft_balance_f
+[2025-06-25T14:00:15.139+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,139 [INFO] etl.stages: Обновление данных в ds.md_account_d с помощью upsert
+[2025-06-25T14:00:15.139+0000] {stages.py:99} INFO - Обновление данных в ds.md_account_d с помощью upsert
+[2025-06-25T14:00:15.152+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,152 [INFO] utils.writers: Загрузка/обновление данных в ds.md_account_d
+[2025-06-25T14:00:15.152+0000] {writers.py:50} INFO - Загрузка/обновление данных в ds.md_account_d
+[2025-06-25T14:00:15.164+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,164 [INFO] utils.writers: Успешно обновлено 112 строк в ds.md_account_d
+[2025-06-25T14:00:15.164+0000] {writers.py:53} INFO - Успешно обновлено 112 строк в ds.md_account_d
+[2025-06-25T14:00:15.166+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,165 [INFO] etl.stages: Данные успешно обновлены в ds.md_account_d
+[2025-06-25T14:00:15.165+0000] {stages.py:108} INFO - Данные успешно обновлены в ds.md_account_d
+[2025-06-25T14:00:15.166+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,166 [INFO] etl.stages: Обновление данных в ds.md_currency_d с помощью upsert
+[2025-06-25T14:00:15.166+0000] {stages.py:99} INFO - Обновление данных в ds.md_currency_d с помощью upsert
+[2025-06-25T14:00:15.178+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,178 [INFO] utils.writers: Загрузка/обновление данных в ds.md_currency_d
+[2025-06-25T14:00:15.178+0000] {writers.py:50} INFO - Загрузка/обновление данных в ds.md_currency_d
+[2025-06-25T14:00:15.184+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,184 [INFO] utils.writers: Успешно обновлено 50 строк в ds.md_currency_d
+[2025-06-25T14:00:15.184+0000] {writers.py:53} INFO - Успешно обновлено 50 строк в ds.md_currency_d
+[2025-06-25T14:00:15.185+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,185 [INFO] etl.stages: Данные успешно обновлены в ds.md_currency_d
+[2025-06-25T14:00:15.185+0000] {stages.py:108} INFO - Данные успешно обновлены в ds.md_currency_d
+[2025-06-25T14:00:15.186+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,186 [INFO] etl.stages: Обновление данных в ds.md_exchange_rate_d с помощью upsert
+[2025-06-25T14:00:15.186+0000] {stages.py:99} INFO - Обновление данных в ds.md_exchange_rate_d с помощью upsert
+[2025-06-25T14:00:15.200+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,200 [INFO] utils.writers: Загрузка/обновление данных в ds.md_exchange_rate_d
+[2025-06-25T14:00:15.200+0000] {writers.py:50} INFO - Загрузка/обновление данных в ds.md_exchange_rate_d
+[2025-06-25T14:00:15.229+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,229 [INFO] utils.writers: Успешно обновлено 460 строк в ds.md_exchange_rate_d
+[2025-06-25T14:00:15.229+0000] {writers.py:53} INFO - Успешно обновлено 460 строк в ds.md_exchange_rate_d
+[2025-06-25T14:00:15.231+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,231 [INFO] etl.stages: Данные успешно обновлены в ds.md_exchange_rate_d
+[2025-06-25T14:00:15.231+0000] {stages.py:108} INFO - Данные успешно обновлены в ds.md_exchange_rate_d
+[2025-06-25T14:00:15.232+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,232 [INFO] etl.stages: Обновление данных в ds.md_ledger_account_s с помощью upsert
+[2025-06-25T14:00:15.232+0000] {stages.py:99} INFO - Обновление данных в ds.md_ledger_account_s с помощью upsert
+[2025-06-25T14:00:15.245+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,245 [INFO] utils.writers: Загрузка/обновление данных в ds.md_ledger_account_s
+[2025-06-25T14:00:15.245+0000] {writers.py:50} INFO - Загрузка/обновление данных в ds.md_ledger_account_s
+[2025-06-25T14:00:15.250+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,250 [INFO] utils.writers: Успешно обновлено 18 строк в ds.md_ledger_account_s
+[2025-06-25T14:00:15.250+0000] {writers.py:53} INFO - Успешно обновлено 18 строк в ds.md_ledger_account_s
+[2025-06-25T14:00:15.251+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,251 [INFO] etl.stages: Данные успешно обновлены в ds.md_ledger_account_s
+[2025-06-25T14:00:15.251+0000] {stages.py:108} INFO - Данные успешно обновлены в ds.md_ledger_account_s
+[2025-06-25T14:00:15.252+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,252 [INFO] etl.stages: Обновление всех таблиц завершено за 8.13 секунд.
+[2025-06-25T14:00:15.252+0000] {stages.py:115} INFO - Обновление всех таблиц завершено за 8.13 секунд.
+[2025-06-25T14:00:15.254+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,254 [INFO] etl.stages: Окончание: 2025-06-25 14:00:15
+[2025-06-25T14:00:15.254+0000] {stages.py:128} INFO - Окончание: 2025-06-25 14:00:15
+[2025-06-25T14:00:15.255+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,255 [INFO] etl.stages: Длительность: 0:00:13.179501
+[2025-06-25T14:00:15.255+0000] {stages.py:129} INFO - Длительность: 0:00:13.179501
+[2025-06-25T14:00:15.256+0000] {log.py:232} WARNING - 2025-06-25 14:00:15,256 [INFO] etl.stages: === Конец процесса ===
+[2025-06-25T14:00:15.256+0000] {stages.py:130} INFO - === Конец процесса ===
+[2025-06-25T14:00:15.256+0000] {python.py:240} INFO - Done. Returned value was: None
+[2025-06-25T14:00:15.278+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2025-06-25T14:00:15.278+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=sync_ds, task_id=sync_ds, run_id=scheduled__2025-06-25T13:00:00+00:00, execution_date=20250625T130000, start_date=20250625T140001, end_date=20250625T140015
+[2025-06-25T14:00:15.321+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-06-25T14:00:15.349+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-06-25T14:00:15.351+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

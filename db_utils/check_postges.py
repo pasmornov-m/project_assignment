@@ -58,3 +58,9 @@ def create_table(db_name, sql_filename):
     cursor.close()
     conn.commit()
     conn.close()
+
+def prepare_db(db_name, schema_name, sql_filename):
+    logger.info(f"Проверка/создание БД '{db_name}', схемы '{schema_name}', и таблиц из '{sql_filename}'")
+    create_database(db_name)
+    create_schema(db_name, schema_name)
+    create_table(db_name, sql_filename)
