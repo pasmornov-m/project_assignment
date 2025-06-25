@@ -9,8 +9,8 @@ RUN python -m pip install --upgrade pip && \
     --resume-retries 5 \
     -r /requirements.txt
 
-USER root
-RUN apt update && \
-    apt install -y openjdk-17-jdk curl
+# USER root
+# RUN apt update && \
+#     apt install -y openjdk-17-jdk curl
 
 USER airflow

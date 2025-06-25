@@ -2,7 +2,8 @@ CREATE TABLE IF NOT EXISTS DS.FT_BALANCE_F (
     on_date DATE NOT NULL,
     account_rk INT NOT NULL,
     currency_rk INT,
-    balance_out FLOAT
+    balance_out FLOAT,
+    PRIMARY KEY (on_date, account_rk)
 );
 
 
@@ -22,7 +23,8 @@ CREATE TABLE IF NOT EXISTS DS.MD_ACCOUNT_D (
     account_number VARCHAR(20) NOT NULL,
     char_type VARCHAR(1) NOT NULL,
     currency_rk INT NOT NULL,
-    currency_code VARCHAR(3) NOT NULL
+    currency_code VARCHAR(3) NOT NULL,
+    PRIMARY KEY (data_actual_date, account_rk)
 );
 
 
@@ -31,7 +33,8 @@ CREATE TABLE IF NOT EXISTS DS.MD_CURRENCY_D (
     data_actual_date DATE NOT NULL,
     data_actual_end_date DATE,
     currency_code VARCHAR(3),
-    code_iso_char VARCHAR(3)
+    code_iso_char VARCHAR(3),
+    PRIMARY KEY (currency_rk, data_actual_date)
 );
 
 
@@ -40,7 +43,8 @@ CREATE TABLE IF NOT EXISTS DS.MD_EXCHANGE_RATE_D (
     data_actual_end_date DATE,
     currency_rk INT NOT NULL,
     reduced_cource FLOAT,
-    code_iso_num VARCHAR(3)
+    code_iso_num VARCHAR(3),
+    PRIMARY KEY (data_actual_date, currency_rk)
 );
 
 
@@ -72,5 +76,6 @@ CREATE TABLE IF NOT EXISTS DS.MD_LEDGER_ACCOUNT_S (
     max_term_measure VARCHAR(1),
     ledger_acc_full_name_translit VARCHAR(1),
     is_revaluation VARCHAR(1),
-    is_correct VARCHAR(1)
+    is_correct VARCHAR(1),
+    PRIMARY KEY (ledger_account, start_date)
 );

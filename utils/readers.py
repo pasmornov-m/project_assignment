@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-from utils.helpers import detect_encoding
+from utils.tools import detect_encoding
 
 
 def read_sql_file(path):

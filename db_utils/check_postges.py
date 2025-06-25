@@ -39,7 +39,7 @@ def create_schema(db_name, schema_name):
     conn.close()
 
 
-def create_tables(db_name, sql_filename):
+def create_table(db_name, sql_filename):
     conn = get_postgres_properties(db_name)
     cursor = conn.cursor()
 
