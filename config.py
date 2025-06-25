@@ -12,8 +12,12 @@ POSTGRES_PORT = 5432
 
 # DS settings
 db_name = 'project'
-ds_schema_name='ds'
-ds_sql_filename='db_utils/ds_tables.sql'
+ds_schema_name = 'ds'
+ds_sql_filename = 'db_utils/ds_tables.sql'
+
+log_schema = 'logs'
+log_table = 'etl_log'
+log_sql_filename = 'db_utils/log_table.sql'
 
 raw_files_info = {
     "raw_path": "raw_data",

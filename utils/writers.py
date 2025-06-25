@@ -28,7 +28,7 @@ def write_df_to_postgres(db_name, schema_name, table_name, df):
         cursor.close()
 
 
-def upsert_df_to_postgres(db_name, schema_name, df, table_name, pkeys_cols):
+def update_from_df_to_postgres(db_name, schema_name, df, table_name, pkeys_cols):
     conn = get_postgres_properties(db_name)
     cursor = conn.cursor()
 
@@ -50,7 +50,7 @@ def upsert_df_to_postgres(db_name, schema_name, df, table_name, pkeys_cols):
         logger.info(f"Загрузка/обновление данных в {schema_name}.{table_name}")
         execute_values(cursor, query, values)
         conn.commit()
-        logger.info(f"Успешно обновлено {len(values)} строк в {schema_name}.{table_name}")
+        logger.info(f"Данные успешно обновлены в {schema_name}.{table_name}")
     except Exception as e:
         conn.rollback()
         logger.error(f"Ошибка при upsert в {schema_name}.{table_name}: {e}")

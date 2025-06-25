@@ -1,10 +1,11 @@
 from db_utils.check_postges import create_database, create_schema, create_table
 from utils.readers import read_csv_to_pd
-from utils.writers import write_df_to_postgres, upsert_df_to_postgres
+from utils.writers import write_df_to_postgres, update_from_df_to_postgres
 from utils.logger import get_logger
 from utils.tools import clean_ds_dfs
 from db_utils.postgres_client import get_postgres_properties
 from db_utils.check_postges import prepare_db
+from db_utils.postgres_tools import log_to_postgres
 
 import time
 from datetime import datetime
@@ -98,7 +99,7 @@ def update_tables(db_name, schema_name, raw_files_info, tables_pkeys):
 
         logger.info(f"Обновление данных в {schema_name}.{table_name} с помощью upsert")
         try:
-            upsert_df_to_postgres(
+            update_from_df_to_postgres(
                 db_name=db_name,
                 schema_name=schema_name,
                 df=clean_dfs[table_name],
@@ -127,4 +128,7 @@ def sync_ds_tables(db_name, schema_name, sql_filename, raw_files_info, tables_pk
     end_time = datetime.now()
     logger.info(f"Окончание: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
     logger.info(f"Длительность: {end_time - start_time}")
+
+    log_to_postgres(start_time, end_time)
+
     logger.info("=== Конец процесса ===")

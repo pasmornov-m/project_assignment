@@ -1,1 +1,6 @@
 **/__pycache__/
+/logs/
+/plugins/
+/config/
+/pgdata/
+/postgres-db-volume/
