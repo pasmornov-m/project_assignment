@@ -1,11 +1,11 @@
-from db_utils.postgres_client import get_postgres_properties
+from clients.postgres_client import get_pg_props_psycopg2
 from utils.readers import read_sql_file
 from utils.logger import get_logger
 
 logger = get_logger(__name__)
 
 def create_database(db_name):
-    conn = get_postgres_properties(db_name='postgres')
+    conn = get_pg_props_psycopg2(db_name='postgres')
 
     conn.autocommit = True
     cursor = conn.cursor()
@@ -27,7 +27,7 @@ def create_database(db_name):
 
 
 def create_schema(db_name, schema_name):
-    conn = get_postgres_properties(db_name)
+    conn = get_pg_props_psycopg2(db_name)
     cursor = conn.cursor()
 
     logger.info(f"Создаю схему '{schema_name}' в базе '{db_name}' (если она отсутствует)")
@@ -40,7 +40,7 @@ def create_schema(db_name, schema_name):
 
 
 def create_table(db_name, sql_filename):
-    conn = get_postgres_properties(db_name)
+    conn = get_pg_props_psycopg2(db_name)
     cursor = conn.cursor()
 
     logger.info(f"Читаю SQL из файла '{sql_filename}'")

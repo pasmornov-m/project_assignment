@@ -1,4 +1,5 @@
+apache-airflow==3.0.2
 chardet==4.0.0
-pandas==2.3.0
 psycopg2_binary==2.9.10
+pyspark==3.5.1
 python-dotenv==1.1.1

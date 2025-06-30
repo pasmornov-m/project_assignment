@@ -18,7 +18,7 @@ dag = DAG(
     default_args=default_args,
     schedule="@hourly",
     catchup=False,
-    tags=['etl']
+    tags=['etl'],
 )
 
 def run_sync_ds_tables(**kwargs):

@@ -4,3 +4,4 @@
 /config/
 /pgdata/
 /postgres-db-volume/
+/spark_jars/

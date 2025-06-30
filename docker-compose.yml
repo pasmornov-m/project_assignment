@@ -14,7 +14,6 @@ x-airflow-common: &airflow-common
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
     AIRFLOW__CORE__TEST_CONNECTION: 'Enabled'
-    AIRFLOW__CORE__DEFAULT_TIMEZONE: 'Europe/Moscow'
     PYTHONPATH: /opt/airflow
   env_file:
     - .env
@@ -27,7 +26,9 @@ x-airflow-common: &airflow-common
     - ./etl:/opt/airflow/etl
     - ./utils:/opt/airflow/utils
     - ./db_utils:/opt/airflow/db_utils
+    - ./clients:/opt/airflow/clients
     - ./raw_data:/opt/airflow/raw_data
+    - ./spark_jars:/opt/spark/spark_jars
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on: 
     &airflow-common-depends-on
