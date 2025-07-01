@@ -8,7 +8,7 @@ def detect_encoding(file_path, n_bytes=10000):
     result = chardet.detect(rawdata)
     return result['encoding']
 
-def clean_ds_dfs(dfs):
+def transform_ds_dfs(dfs):
 
     # ft_balance_f
     raw_ft_balance_ft = dfs['ft_balance_f']

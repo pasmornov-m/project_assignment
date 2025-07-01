@@ -1,6 +1,6 @@
--- Active: 1747238334676@@127.0.0.1@5433@project
+-- Active: 1750861427417@@127.0.0.1@5432@project
 
-CREATE DATABASE DS
+CREATE DATABASE project
 
 -- DS 
 
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS DS.FT_BALANCE_F (
     account_rk INT NOT NULL,
     currency_rk INT,
     balance_out FLOAT,
-    PRIMARY KEY (ledger_account, start_date)
+    PRIMARY KEY (on_date, account_rk)
 );
 
 

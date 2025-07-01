@@ -1,7 +1,7 @@
 from utils.readers import read_csv_to_spark
 from utils.writers import write_to_postgres, upsert_spark_df_to_postgres
 from utils.logger import get_logger
-from utils.tools import clean_ds_dfs
+from utils.tools import transform_ds_dfs
 from clients.postgres_client import get_pg_props_psycopg2
 from clients.spark_client import create_spark_session
 from db_utils.check_postges import create_database, create_schema, create_table, prepare_db
@@ -24,7 +24,7 @@ def create_and_load(spark, db_name, schema_name, sql_filename, raw_files_info):
 
     logger.info("Чтение CSV файлов в DataFrame")
     dfs_from_csv = read_csv_to_spark(spark=spark, path=raw_files_info['raw_path'], files=raw_files_info['raw_files'])
-    clean_dfs = clean_ds_dfs(dfs_from_csv)
+    clean_dfs = transform_ds_dfs(dfs_from_csv)
 
     logger.info("Начало загрузки данных в БД")
     start_time = datetime.now(ZoneInfo("Europe/Moscow"))
@@ -67,10 +67,10 @@ def update_tables(spark, db_name, schema_name, raw_files_info, tables_pkeys):
     logger.info(f"Начало обновления таблиц в схеме '{schema_name}' БД '{db_name}'")
     start_time = time.time()
     dfs_from_csv = read_csv_to_spark(spark=spark, path=raw_files_info['raw_path'], files=raw_files_info['raw_files'])
-    clean_dfs = clean_ds_dfs(dfs_from_csv)
+    clean_dfs = transform_ds_dfs(dfs_from_csv)
     logger.info(f"Данные из csv успешно загружены: {list(clean_dfs.keys())}")
 
-    # Обработка FT_POSTING_F (truncate + insert)
+    # Обработка ft_posting_f (truncate + insert)
     if 'ft_posting_f' in clean_dfs:
         logger.info(f"Truncate таблицы {schema_name}.ft_posting_f перед полной загрузкой")
         conn = get_pg_props_psycopg2(db_name)
