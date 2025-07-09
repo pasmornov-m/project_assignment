@@ -4,6 +4,7 @@ import sys
 def get_logger(name=__name__, log_level=logging.INFO):
     logger = logging.getLogger(name)
     logger.setLevel(log_level)
+    logger.propagate = False
 
     if not logger.handlers:
         handler = logging.StreamHandler(sys.stdout)

@@ -1,11 +1,12 @@
 from utils.readers import read_csv_to_spark
-from utils.writers import write_to_postgres, upsert_spark_df_to_postgres
+from utils.writers import write_to_postgres, upsert_spark_df_to_postgres, save_csv_from_pg
 from utils.logger import get_logger
-from utils.tools import transform_ds_dfs
+from utils.tools import transform_ds_dfs, transform_dm_f101_round_f
 from clients.postgres_client import get_pg_props_psycopg2
 from clients.spark_client import create_spark_session
 from db_utils.check_postges import create_database, create_schema, create_table, prepare_db
 from db_utils.postgres_tools import log_to_postgres
+from config import raw_files_path
 
 import time
 from datetime import datetime
@@ -132,5 +133,39 @@ def sync_ds_tables(db_name, schema_name, sql_filename, raw_files_info, tables_pk
     logger.info(f"Длительность: {end_time - start_time}")
 
     log_to_postgres(spark, 'run_sync_ds_tables', start_time, end_time)
+
+    logger.info("=== Конец процесса ===")
+
+def dm_f101_round_f_to_csv(db_name, schema_name, table_name, filename):
+    logger.info("=== Начало процесса сохранения dm_f101_round_f в csv===")
+    start_time = datetime.now(ZoneInfo("Europe/Moscow")).replace(tzinfo=None)
+    logger.info(f"Начало: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
+
+    spark = create_spark_session()
+    save_csv_from_pg(spark=spark, db_name=db_name, schema_name=schema_name, table_name=table_name, filename=filename)
+
+    end_time = datetime.now(ZoneInfo("Europe/Moscow")).replace(tzinfo=None)
+    logger.info(f"Окончание: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    logger.info(f"Длительность: {end_time - start_time}")
+
+    log_to_postgres(spark, 'run_dm_f101_round_f_to_csv', start_time, end_time)
+
+    logger.info("=== Конец процесса ===")
+
+def reload_dm_f101_round_f_csv(db_name, schema_name, table_name, filename):
+    logger.info("=== Начало процесса загрузки dm_f101_round_f из csv в таблицу===")
+    start_time = datetime.now(ZoneInfo("Europe/Moscow")).replace(tzinfo=None)
+    logger.info(f"Начало: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
+
+    spark = create_spark_session()
+    df_dict = read_csv_to_spark(spark, raw_files_path, filename)
+    df = transform_dm_f101_round_f(df_dict[filename])
+    write_to_postgres(df, db_name, schema_name, table_name, mode='overwrite')
+
+    end_time = datetime.now(ZoneInfo("Europe/Moscow")).replace(tzinfo=None)
+    logger.info(f"Окончание: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    logger.info(f"Длительность: {end_time - start_time}")
+
+    log_to_postgres(spark, 'reload_dm_f101_round_f_csv', start_time, end_time)
 
     logger.info("=== Конец процесса ===")

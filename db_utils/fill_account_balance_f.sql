@@ -10,7 +10,7 @@ LEFT JOIN
 FROM ds.md_exchange_rate_d
 WHERE '2017-12-31' BETWEEN data_actual_date AND data_actual_end_date) t1
 USING(currency_rk)
-WHERE on_date = '2017-12-31'
+WHERE on_date = '2017-12-31';
 
 
 

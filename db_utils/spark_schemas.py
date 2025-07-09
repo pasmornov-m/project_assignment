@@ -68,7 +68,8 @@ MD_LEDGER_ACCOUNT_S = StructType([
 ])
 
 LOG_SCHEMA = StructType([
+    StructField("operation_name", StringType(), False),
     StructField("start_time", TimestampType(), False),
     StructField("end_time", TimestampType(), False),
-    StructField("duration_seconds", IntegerType(), False)
+    StructField("duration_sec", IntegerType(), False)
 ])

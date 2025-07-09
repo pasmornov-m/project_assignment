@@ -1,5 +1,6 @@
 import chardet
 import pyspark.sql.functions as F
+from pyspark.sql.types import DateType, StringType, DecimalType
 
 
 def detect_encoding(file_path, n_bytes=10000):
@@ -79,3 +80,29 @@ def transform_ds_dfs(dfs):
         .withColumn("end_date", F.to_date("end_date", "yyyy-MM-dd").cast("date"))
 
     return dfs
+
+
+def transform_dm_f101_round_f(df):
+    df = df \
+    .withColumn("from_date", F.to_date("from_date", "yyyy-MM-dd").cast(DateType())) \
+    .withColumn("to_date", F.to_date("to_date", "yyyy-MM-dd").cast(DateType())) \
+    .withColumn("chapter", df["chapter"].cast(StringType())) \
+    .withColumn("ledger_account", df["ledger_account"].cast(StringType())) \
+    .withColumn("characteristic", df["characteristic"].cast(StringType())) \
+    .withColumn("balance_in_rub", df["balance_in_rub"].cast(DecimalType(23, 8))) \
+    .withColumn("balance_in_val", df["balance_in_val"].cast(DecimalType(23, 8))) \
+    .withColumn("balance_in_total", df["balance_in_total"].cast(DecimalType(23, 8))) \
+    .withColumn("turn_deb_rub", df["turn_deb_rub"].cast(DecimalType(23, 8))) \
+    .withColumn("turn_deb_val", df["turn_deb_val"].cast(DecimalType(23, 8))) \
+    .withColumn("turn_deb_total", df["turn_deb_total"].cast(DecimalType(23, 8))) \
+    .withColumn("turn_cre_rub", df["turn_cre_rub"].cast(DecimalType(23, 8))) \
+    .withColumn("turn_cre_val", df["turn_cre_val"].cast(DecimalType(23, 8))) \
+    .withColumn("turn_cre_total", df["turn_cre_total"].cast(DecimalType(23, 8))) \
+    .withColumn("balance_out_rub", df["balance_out_rub"].cast(DecimalType(23, 8))) \
+    .withColumn("balance_out_val", df["balance_out_val"].cast(DecimalType(23, 8))) \
+    .withColumn("balance_out_total", df["balance_out_total"].cast(DecimalType(23, 8)))
+
+    return df
+    
+    
+    

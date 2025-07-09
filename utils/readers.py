@@ -7,9 +7,11 @@ def read_sql_file(path):
         return file.read()
 
 def read_csv_to_spark(spark, path, files):
+    if isinstance(files, str):
+        files = [files]
     dfs = {}
     for f in files:
-        f_with_ext = f+".csv"
+        f_with_ext = f if f.lower().endswith(".csv") else f + ".csv"
         full_path = os.path.join(path, f_with_ext)
         enc = detect_encoding(full_path)
         try:
