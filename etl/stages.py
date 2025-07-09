@@ -131,6 +131,6 @@ def sync_ds_tables(db_name, schema_name, sql_filename, raw_files_info, tables_pk
     logger.info(f"Окончание: {end_time.strftime('%Y-%m-%d %H:%M:%S')}")
     logger.info(f"Длительность: {end_time - start_time}")
 
-    log_to_postgres(spark, start_time, end_time)
+    log_to_postgres(spark, 'run_sync_ds_tables', start_time, end_time)
 
     logger.info("=== Конец процесса ===")

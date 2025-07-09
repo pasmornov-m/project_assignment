@@ -4,9 +4,10 @@ from config import db_name, log_schema, log_table, log_sql_filename
 from db_utils.spark_schemas import LOG_SCHEMA
 
 
-def log_to_postgres(spark, start_time, end_time):
+def log_to_postgres(spark, operation_name, start_time, end_time):
     duration = int((end_time - start_time).total_seconds())
     log_data = [{
+        'operation_name': operation_name,
         'start_time': start_time,
         'end_time': end_time,
         'duration_seconds': duration
