@@ -96,7 +96,7 @@
 Поднимите все компоненты через Docker Compose:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 > Это создаст и запустит Airflow, PostgreSQL, Spark и необходимые зависимости.
@@ -113,7 +113,7 @@ docker-compose up
 
 ---
 
-## ⚙️ Используемые технологии
+## Используемые технологии
 
 * **Apache Airflow** – оркестрация пайплайна
 * **Apache Spark** – обработка и загрузка CSV
