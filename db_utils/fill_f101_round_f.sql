@@ -1,5 +1,3 @@
-
-
 CREATE OR REPLACE PROCEDURE dm.fill_f101_round_f (i_OnDate DATE)
 AS $$
 DECLARE

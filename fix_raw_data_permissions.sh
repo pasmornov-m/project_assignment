@@ -7,8 +7,13 @@ if [ ! -d "$RAW_DATA_DIR" ]; then
   exit 1
 fi
 
-sudo chmod -R 777 "$RAW_DATA_DIR"
+USER_GROUP=$(id -g)
+
+sudo chown -R 50000:$USER_GROUP "$RAW_DATA_DIR"
+
+sudo chmod -R 775 "$RAW_DATA_DIR"
 
 echo "Права и владелец успешно установлены для $RAW_DATA_DIR"
 
-# после применить chmod +x fix_raw_data_permissions.sh 
+# после применить 
+# chmod +x fix_raw_data_permissions.sh 

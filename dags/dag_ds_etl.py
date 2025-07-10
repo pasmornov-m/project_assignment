@@ -28,7 +28,7 @@ default_args = {
 }
 
 dag = DAG(
-    dag_id = "sync_ds",
+    dag_id = "project_etl",
     default_args=default_args,
     schedule="@hourly",
     catchup=False,
