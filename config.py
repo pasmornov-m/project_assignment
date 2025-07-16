@@ -6,7 +6,8 @@ load_dotenv()
 
 SPARK_APP_NAME = "Project_ETL"
 SPARK_MASTER = "local[*]"
-
+SPARK_JARS_DIR = "/opt/spark/spark_jars/postgresql-42.7.5.jar"
+# SPARK_JARS_DIR = "/home/maxp/Work/project_assignment/spark_jars/postgresql-42.7.5.jar"
 
 POSTGRES_USER = os.getenv("POSTGRES_USER")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
@@ -20,6 +21,11 @@ POSTGRES_URL = f"jdbc:postgresql://{POSTGRES_HOST}:{POSTGRES_PORT}/"
 log_schema = 'logs'
 log_table = 'etl_log'
 log_sql_filename = 'db_utils/log_table.sql'
+
+
+####################################################################
+# TASK 1
+####################################################################
 
 # db settings
 db_name = 'project'
@@ -51,4 +57,22 @@ ds_tables_pkeys = {
     "md_currency_d": ["currency_rk", "data_actual_date"],
     "md_exchange_rate_d": ["data_actual_date", "currency_rk"],
     "md_ledger_account_s": ["ledger_account", "start_date"]
+}
+
+
+####################################################################
+# TASK 2
+####################################################################
+
+dwh_db_name = 'dwh'
+rd_schema_name = "rd"
+
+rd_sql_filename = "db_utils/rd_tables.sql"
+dm_client_drop_duplicates_filename = "db_utils/dm_client_drop_duplicates.sql"
+dm_fill_loan_holiday_info_filename = "db_utils/dm_fill_loan_holiday_info.sql"
+
+task_2_files_info = {
+    "raw_path": raw_files_path,
+    "raw_files": ["deal_info", 
+                  "product"]
 }

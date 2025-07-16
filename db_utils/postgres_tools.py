@@ -30,7 +30,7 @@ def run_sql_file(db_name, sql_filename):
     conn.close()
 
 
-def log_to_postgres(spark, operation_name, start_time, end_time):
+def log_to_postgres(spark, operation_name, start_time, end_time, db_name=None):
     duration = int((end_time - start_time).total_seconds())
     log_data = [{
         'operation_name': operation_name,

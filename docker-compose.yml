@@ -29,6 +29,7 @@ x-airflow-common: &airflow-common
     - ./clients:/opt/airflow/clients
     - ./raw_data:/opt/airflow/raw_data
     - ./spark_jars:/opt/spark/spark_jars
+    - ./task_2:/opt/airflow/task_2
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on: 
     &airflow-common-depends-on

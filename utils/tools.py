@@ -1,9 +1,9 @@
 import chardet
 import pyspark.sql.functions as F
-from pyspark.sql.types import DateType, StringType, DecimalType
+from pyspark.sql.types import DateType, StringType, DecimalType, LongType
 
 
-def detect_encoding(file_path, n_bytes=10000):
+def detect_encoding(file_path, n_bytes=1000):
     with open(file_path, 'rb') as f:
         rawdata = f.read(n_bytes)
     result = chardet.detect(rawdata)
@@ -105,4 +105,33 @@ def transform_dm_f101_round_f(df):
     return df
     
     
+def transform_rd_dfs(dfs):
+
+    # deal_info
+    dfs_deal_info = dfs['deal_info']
+    dfs_deal_info = dfs_deal_info.dropDuplicates()
+    dfs['deal_info'] = dfs_deal_info \
+        .withColumn("deal_rk", F.col("deal_rk").cast(LongType())) \
+        .withColumn("deal_num", F.col("deal_num").cast("string")) \
+        .withColumn("deal_name", F.col("deal_name").cast("string")) \
+        .withColumn("deal_sum", F.col("deal_sum").cast("double")) \
+        .withColumn("client_rk", F.col("client_rk").cast(LongType())) \
+        .withColumn("account_rk", F.col("account_rk").cast(LongType())) \
+        .withColumn("agreement_rk", F.col("agreement_rk").cast(LongType())) \
+        .withColumn("deal_start_date", F.to_date(F.col("deal_start_date"), "yyyy-MM-dd")) \
+        .withColumn("department_rk", F.col("department_rk").cast(LongType())) \
+        .withColumn("product_rk", F.col("product_rk").cast(LongType())) \
+        .withColumn("deal_type_cd", F.col("deal_type_cd").cast("string")) \
+        .withColumn("effective_from_date", F.to_date(F.col("effective_from_date"), "yyyy-MM-dd")) \
+        .withColumn("effective_to_date", F.to_date(F.col("effective_to_date"), "yyyy-MM-dd"))
     
+    # product
+    dfs_product = dfs['product']
+    dfs_product = dfs_product.dropDuplicates()
+    dfs['product'] = dfs_product \
+        .withColumn("product_rk", F.col("product_rk").cast(LongType())) \
+        .withColumn("product_name", F.col("product_name").cast("string")) \
+        .withColumn("effective_from_date", F.to_date(F.col("effective_from_date"), "yyyy-MM-dd")) \
+        .withColumn("effective_to_date", F.to_date(F.col("effective_to_date"), "yyyy-MM-dd"))
+    
+    return dfs

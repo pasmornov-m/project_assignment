@@ -57,6 +57,7 @@ def upsert_spark_df_to_postgres(df, db_name, schema_name, table_name, pkeys_cols
         cursor.close()
         conn.close()
 
+
 def save_csv_from_pg(spark, db_name, schema_name, table_name, filename, overwrite=None):
     output_path = f"/opt/airflow/{raw_files_path}/{filename}"
     temp_dir = "/tmp/spark_csv_export"
