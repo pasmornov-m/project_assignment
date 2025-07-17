@@ -10,6 +10,7 @@ from config import (
     task_2_files_info,
     dm_client_drop_duplicates_filename,
     dm_fill_loan_holiday_info_filename,
+    correct_account_balance_turnover_filename,
 )
 
 
@@ -18,7 +19,7 @@ default_args = {
     'depends_on_past': False,
     'start_date': datetime(2025, 1, 1),
     'retries': 1,
-    "retry_delay": timedelta(minutes=11)
+    "retry_delay": timedelta(minutes=1)
 }
 
 dag = DAG(
@@ -45,6 +46,12 @@ def run_sync_rd_tables(**kwargs):
     )
 
 def run_procedure_dm_fill_loan_holiday_info(**kwargs):
+    run_sql_file(
+        db_name=kwargs['db_name'],
+        sql_filename=kwargs['sql_filename']
+    )
+
+def run_procedure_correct_account_balance_turnover(**kwargs):
     run_sql_file(
         db_name=kwargs['db_name'],
         sql_filename=kwargs['sql_filename']
@@ -82,6 +89,17 @@ procedure_dm_fill_loan_holiday_info_task = PythonOperator(
     dag=dag
 )
 
+procedure_correct_account_balance_turnover_task = PythonOperator(
+    task_id='procedure_correct_account_balance_turnover',
+    python_callable=run_procedure_correct_account_balance_turnover,
+    op_kwargs={
+        "db_name": dwh_db_name,
+        "sql_filename": correct_account_balance_turnover_filename
+    },
+    dag=dag
+)
+
 procedure_dm_client_drop_duplicates_task >> \
 sync_task >> \
-procedure_dm_fill_loan_holiday_info_task
+procedure_dm_fill_loan_holiday_info_task >> \
+procedure_correct_account_balance_turnover_task

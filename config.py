@@ -70,6 +70,7 @@ rd_schema_name = "rd"
 rd_sql_filename = "db_utils/rd_tables.sql"
 dm_client_drop_duplicates_filename = "db_utils/dm_client_drop_duplicates.sql"
 dm_fill_loan_holiday_info_filename = "db_utils/dm_fill_loan_holiday_info.sql"
+correct_account_balance_turnover_filename = "db_utils/correct_account_balance_turnover.sql"
 
 task_2_files_info = {
     "raw_path": raw_files_path,

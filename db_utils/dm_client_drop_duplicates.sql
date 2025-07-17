@@ -19,6 +19,19 @@ begin
 	    ) t
 	    where rn > 1
 	);
+	
+	end_time := clock_timestamp();
+	duration := extract(epoch from (end_time - start_time))::INT;
+
+	insert into logs.etl_log(operation_name,
+							start_time,
+							end_time,
+							duration_sec)
+	values('client_drop_duplicates', start_time, end_time, duration);
+	
+	exception
+		when others then
+			raise notice 'client_drop_duplicates error: %', sqlerrm;
 end;
 $$ language plpgsql;
 
